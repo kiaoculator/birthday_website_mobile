@@ -52,8 +52,9 @@ function Picture() {
           <img
             src={image}
             alt={`Stacked image ${index + 1}`}
-            className="w-full h-full object-cover rounded-lg shadow-lg"
+            className="w-full h-full object-cover rounded-lg shadow-lg pointer-events-none select-none"
             onLoad={handleImageLoad} // Increment the counter when the image loads
+            draggable={false}
           />
         </motion.div>
       ))}
