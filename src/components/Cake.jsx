@@ -3,6 +3,7 @@ import "../assets/css/cake.css";
 import { CakeSVG, confetti } from "../assets";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import config from '../../config.js';
 
 function Cake() {
   // You may want to tweak these audio codes more to your liking.
@@ -24,7 +25,7 @@ function Cake() {
         analyser = audioContext.createAnalyser();
         const source = audioContext.createMediaStreamSource(stream);
 
-        analyser.fftSize = 512;
+        analyser.fftSize = config.audioSettings.fftSize;
         const bufferLength = analyser.frequencyBinCount;
         dataArray = new Uint8Array(bufferLength);
         source.connect(analyser);
@@ -38,13 +39,13 @@ function Cake() {
     function detectBlow() {
       if (!analyser || !dataArray) return;
       analyser.getByteFrequencyData(dataArray);
-      const lowFrequencyValues = dataArray.slice(0, 15);
+      const lowFrequencyValues = dataArray.slice(0, config.audioSettings.lowFrequencySlice);
       const averageLowFrequency =
         lowFrequencyValues.reduce((sum, value) => sum + value, 0) /
         lowFrequencyValues.length;
 
-      const blowThreshold = 100; // Moderate threshold
-      const requiredDuration = 1500; // 1. 5 sec blow required
+      const blowThreshold = config.cakeBlowThreshold; // Moderate threshold
+      const requiredDuration = config.cakeBlowDuration; // 1. 5 sec blow required
 
       if (averageLowFrequency > blowThreshold) {
         if (!blowStartTime) {
@@ -53,7 +54,7 @@ function Cake() {
           setCandlesBlownOut(true);
         }
       } else {
-        if (blowStartTime && performance.now() - blowStartTime > 200) {
+        if (blowStartTime && performance.now() - blowStartTime > config.audioSettings.blowDetectionDelay) {
           blowStartTime = null;
         }
       }
@@ -64,7 +65,7 @@ function Cake() {
     setTimeout(() => {
       initBlowDetection();
       setMicPermissionGranted(true);
-    }, 10000); //permission delay
+    }, config.cakePermissionDelay); //permission delay
 
     return () => {
       if (audioContext) {
@@ -102,13 +103,13 @@ function Cake() {
               </defs>
               <text fontSize="40" fill="white" textAnchor="middle">
                 <textPath href="#curve" startOffset="50%">
-                  Happy Birthday!
+                  {config.cakeTitle}
                 </textPath>
               </text>
             </svg>
-            <Link to="/present" className="flex justify-center items-center">
-              <p className="absolute top-[30rem] xs:top-[36rem] s:top-[40rem] px-7 py-3 bg-customBlue text-white rounded-full hover:bg-blue-600 font-medium text-base text-center ">
-                Next Page
+            <Link to={config.routes.present} className="flex justify-center items-center">
+              <p className={`absolute top-[30rem] xs:top-[36rem] s:top-[40rem] px-7 py-3 ${config.buttonColor} ${config.buttonTextColor} rounded-full ${config.buttonHoverColor} font-medium text-base text-center`}>
+                {config.nextPageButtonText}
               </p>
             </Link>
           </motion.div>
@@ -128,7 +129,7 @@ function Cake() {
                       }}
                       className="block -translate-x-[60px] translate-y-[105px] -rotate-[30deg] text-gray-200 text-xl "
                     >
-                      blow
+                      {config.cakeBlowInstructions}
                     </motion.div>
                     <motion.div
                       animate={{ opacity: [0, 0.25, 0] }}
@@ -139,7 +140,7 @@ function Cake() {
                       }}
                       className="block translate-x-10 translate-y-[80px] rotate-[30deg] text-gray-200 text-xl"
                     >
-                      blow
+                      {config.cakeBlowInstructions}
                     </motion.div>
                   </div>
                   <div>

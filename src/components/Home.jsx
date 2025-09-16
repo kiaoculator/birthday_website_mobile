@@ -1,20 +1,18 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import config from '../../config.js'
 
 function Home() {
     const [visibleCount, setVisibleCount] = useState(1)
     const navigate = useNavigate()
-    const sentences = [
-    "Hi John Doe",
-    "I have something to show you:)"
-  ]
+    const sentences = config.homeMessages
 
   const handleClick = () => {
     if (visibleCount < sentences.length) {
       setVisibleCount(visibleCount + 1)
     } else {
-      navigate('/pictures')
+      navigate(config.routes.pictures)
     }
   }
   return (
@@ -28,8 +26,8 @@ function Home() {
             key={index}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.2 }}
-            className="text-4xl font-bold text-customBlue drop-shadow-lg"
+            transition={{ duration: config.fadeInDuration }}
+            className={`text-4xl font-bold ${config.primaryTextColor} drop-shadow-lg`}
           >
             {sentence}
           </motion.p>

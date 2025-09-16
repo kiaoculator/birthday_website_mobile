@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { picture} from '../assets';
 import { Link } from 'react-router-dom'; 
 import SectionWrapper from './SectionWrapper';
+import config from '../../config.js';
 // Add your own images by putting them in the assets folder and import them.
 const images = [
  picture,
@@ -20,14 +21,14 @@ function Picture() {
   const allImagesLoaded = loadedImages === images.length;
   return (
     <SectionWrapper>
-      <Link to="/card">
-        <p className="absolute text-4xl font-bold text-customBlue inset-0 flex justify-center items-center text-center transform rotate-6 cursor-pointer">
-          You're Getting Old! :P
+      <Link to={config.routes.card}>
+        <p className={`absolute text-4xl font-bold ${config.primaryTextColor} inset-0 flex justify-center items-center text-center transform rotate-6 cursor-pointer`}>
+          {config.picturesTitle}
         </p>
       </Link>
       {!allImagesLoaded && (
         <div className="absolute inset-0 flex justify-center items-center">
-          <p className="text-xl font-medium text-gray-500">Loading images...</p>
+          <p className="text-xl font-medium text-gray-500">{config.picturesLoadingText}</p>
         </div>
       )}
       {images.map((image, index) => (
