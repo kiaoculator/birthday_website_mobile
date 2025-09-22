@@ -108,7 +108,7 @@ function Cake() {
               </text>
             </svg>
             <Link to={config.routes.present} className="flex justify-center items-center">
-              <p className={`absolute top-[30rem] xs:top-[36rem] s:top-[40rem] px-7 py-3 ${config.buttonColor} ${config.buttonTextColor} rounded-full ${config.buttonHoverColor} font-medium text-base text-center`}>
+              <p className={`absolute top-[40rem] xs:top-[45rem] s:top-[50rem] px-7 py-3 ${config.buttonColor} ${config.buttonTextColor} rounded-full ${config.buttonHoverColor} font-medium text-base text-center`}>
                 {config.nextPageButtonText}
               </p>
             </Link>

@@ -34,7 +34,7 @@ const config = {
   cakeBlowInstructions: "blow", // Text that appears to instruct blowing
   cakePermissionDelay: 10000, // Delay in milliseconds before asking for microphone permission
   cakeBlowThreshold: 100, // Audio threshold for detecting blowing (adjust if too sensitive)
-  cakeBlowDuration: 1500, // Required blow duration in milliseconds
+  cakeBlowDuration: 500, // Required blow duration in milliseconds
   
   // 🎁 Present Page
   presentTitle: "Click the box to see your gifts!", // Title above the gift box
