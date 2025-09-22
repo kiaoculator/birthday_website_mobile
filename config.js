@@ -6,9 +6,9 @@ const config = {
   */
 
   // 🏠 Home Page
-  recipientName: "John Doe", // Name of the birthday person
+  recipientName: "Andre Braugher", // Name of the birthday person
   homeMessages: [
-    "Hi John Doe", // First greeting message
+    "Hi Andre", // First greeting message
     "I have something to show you:)" // Second message that appears after clicking
   ],
 
