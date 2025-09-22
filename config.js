@@ -7,7 +7,7 @@ const config = {
 
   // 🏠 Home Page
   homeMessages: [
-    "Hi Andre Braugher", // First greeting message
+    "Hi John Doe,", // First greeting message
     "I have something to show you:)" // Second message that appears after clicking
   ],
 
